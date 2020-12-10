@@ -42,6 +42,10 @@ interface NovoOverviewField {
 }
 
 interface PageInteractionAPI {
+  getValue(arg0: string): any;
+  disable(arg0: string);
+  hide(arg0: string);
+  setValue(arg0: string, arg1: any);
   globals: {
     settings: any;
     entitlements: any;
