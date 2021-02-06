@@ -8,13 +8,13 @@ const interaction: FieldInteraction = {
       
       const myClient = {
   
-        //adminUserTypeId: parseInt(  "${admin.user.type.id}"),
-        adminUserTypeId: "104816",
+        adminUserTypeId: parseInt(  "${admin.user.type.id}"),
+        //adminUserTypeId: "104816",
   
         init: () => {
             const userTypeId = API.globals.user.userTypeId;
 
-            if(userTypeId!==myClient.adminUserTypeId)
+            if(userTypeId!=myClient.adminUserTypeId)
             {
                 API.disable('customDate1');
             }
