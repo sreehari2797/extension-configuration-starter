@@ -12,24 +12,31 @@ const interaction: PageInteraction = {
                 
                 var userId = form.submissions.userid;
 
-                var elig = myClient.getEligibility(userId);
+                //var elig = myClient.getEligibility(userId);
 
-                if(elig === 'Pending' || elig === 'Suspended')
-                {
-                    form.valid = false;
-                    form.errorMessage = 'Eligibility status requires review.';
-                }
+                return myClient.getEligibility(userId).then(response => {
+                    var elig = response.data.data.candidate.customText1;
+                    if(elig === 'Pending' || elig === 'Suspended')
+                    {
+                        form.valid = false;
+                        form.errorMessage = 'Eligibility status requires review.';
+                    }
 
-                else {
-                    form.valid= true;
-                }
+                    else {
+                        form.valid= true;
+                    }
+
+                    return form;
+                });
+
+                
 
             },
 
             
             getEligibility: (userId) => {
 
-                var eligibilty = API.appBridge.httpGET('/entity/JobSubmission/${userId}?Candidate(customText1)')
+                var eligibilty = API.appBridge.httpGET('/entity/JobSubmission/${userId}?fields=candidate(customText1)')
                 return eligibilty;
             }
 
